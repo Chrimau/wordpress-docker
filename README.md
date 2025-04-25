@@ -67,14 +67,16 @@ View logs:
 docker-compose logs -f
 
 
-🔒 Bonus Tip: Keep Tokens Secure
+🔒Something you should know: Always Keep Tokens Secure
 Instead of hardcoding the token (especially for production), it's better to load it from an .env file like this:
 
 In your docker-compose.yml:
 
 environment:
   - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    
 In a .env file (same folder):
 
-NGROK_AUTHTOKEN=2wC10LrII2YGPOEV9ojAxiBmEqh_7uwcMQuWnX1c5AaBirdba
+NGROK_AUTHTOKEN=2**10Lr********ojAxiBmEq***uwcMQ***X1c*AaB*****.
+
 That way you avoid accidentally sharing it when you push to GitHub.
