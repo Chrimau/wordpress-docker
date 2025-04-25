@@ -1,4 +1,4 @@
-version: '3.8'
+
 
 services:
   wordpress:
@@ -25,6 +25,17 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
       MYSQL_ROOT_PASSWORD: rootpassword
+
+ngrok:
+    image: wernight/ngrok
+    restart: always
+    depends_on:
+      - wordpress
+    command: ["ngrok", "http", "--log=stdout", "wordpress:80"]
+    environment:
+      NGROK_AUTHTOKEN: 2wC10LrII2YGPOEV9ojAxiBmEqh_7uwcMQuWnX1c5AaBirdba # Get from ngrok dashboard
+    ports:
+      - "4040:4040"
 
 volumes:
   wordpress_data:
