@@ -1,5 +1,5 @@
 ## Running a Dockerized WordPress on your local machine
-Hello, running a dockerized wordpress using Ngrok is straightforward on your CLI. view mine at # https://4463-2a06-93c2-7f-6-398e-9c59-7d22-15e8.ngrok-free.app  (note you may see an error message whenever its offline because its running on my local machine)
+Hello, running a dockerized wordpress using Ngrok is straightforward on your CLI. view mine at https://4463-2a06-93c2-7f-6-398e-9c59-7d22-15e8.ngrok-free.app  (note you may see an error message whenever its offline because its running on my local machine)
 Here's a quick guide to get you up and running:
 
 ✅ Prerequisites:
