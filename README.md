@@ -1,10 +1,11 @@
-## Running a Dockerized WordPress on your local machine
+## Setting up a Dockerized WordPress + Ngrok on your local machine
 Hello, running a dockerized wordpress using Ngrok is straightforward on your CLI. view mine at https://4463-2a06-93c2-7f-6-398e-9c59-7d22-15e8.ngrok-free.app  (note: you may see an error message whenever its offline because its running on my local machine)
 Here's a quick guide to get you up and running:
 
 ## Prerequisites:
-Docker installed
-Docker Compose installed
+Docker desktop installed
+Ngrok Account
+your local terminal
 
 ## 📁 Step 1: Create a Project Folder
 mkdir wordpress-docker
@@ -12,12 +13,14 @@ cd wordpress-docker
 
 ## 📝 Step 2: Create a docker-compose.yml File
 Create a file called docker-compose.yml inside your folder with the following content:
-
+<pre>
+cat << 'EOF' > docker-compose.yml
 version: '3.8'
 
 services:
   wordpress:
     image: wordpress:latest
+    restart: always
     ports:
       - "8000:80"
     environment:
@@ -41,10 +44,23 @@ services:
       MYSQL_PASSWORD: wordpress
       MYSQL_ROOT_PASSWORD: rootpassword
 
+ ngrok:
+    image: wernight/ngrok
+    restart: always
+    depends_on:
+      - wordpress
+    command: ["ngrok", "http", "--log=stdout", "wordpress:80"]
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_TOKEN:-your_token_here} # Get from ngrok dashboard
+    ports:
+      - "4040:4040"
+      
 volumes:
   wordpress_data:
   db_data:
-🚀 Step 3: Run Docker Compose
+  EOF </pre>
+  
+## 🚀 Step 3: Run Docker Compose
 In your terminal, from inside the wordpress-docker directory, run:
 
 docker-compose up -d
@@ -58,26 +74,26 @@ You should see the WordPress installation page. Complete the setup as you wish.
 
 ## 📌 Useful Commands
 Stop the containers:
-docker-compose down
+<pre> docker-compose down </pre>
 
 Stop and remove volumes:
-docker-compose down -v
+<pre> docker-compose down -v </pre>
 
 View logs:
-docker-compose logs -f
+<pre> docker-compose logs -f </pre>
 
 
-🔒Something you should know: Always Keep Tokens Secure
-Instead of hardcoding the token (especially for production), it's better to load it from an .env file like this:
+🔒Things you should know: Always Keep Tokens Secure
+Instead of hardcoding the token (especially for production), it's better to load it from an .env file or ngrok section in the yaml file like this:
 
 In your docker-compose.yml:
 
-environment:
-  - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
-    
-In a .env file (same folder), replace ${NGROK_AUTHTOKEN} with the actual ngrok token,here is a sample :
+  <pre> environment:
+    NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN} </pre>
 
-NGROK_AUTHTOKEN=2**10Lr********ojAxiBmEq***uwcMQ***X1c*AaB*****.
+Replace ${NGROK_AUTHTOKEN} with the actual ngrok token,here is a sample :
+
+<pre> NGROK_AUTHTOKEN=2**10Lr********ojAxiBmEq***uwcMQ***X1c*AaB**** </pre>
 
 (This command protects you from avoid accidentally sharing the token which is a secret when you push to GitHub).
 
