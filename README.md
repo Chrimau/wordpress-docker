@@ -2,13 +2,15 @@
 Hello, running a dockerized wordpress using Ngrok is straightforward on your CLI. view mine at https://4463-2a06-93c2-7f-6-398e-9c59-7d22-15e8.ngrok-free.app  (note: you may see an error message whenever its offline because its running on my local machine)
 Here's a quick guide to get you up and running:
 
-✅ Prerequisites:
+## Prerequisites:
 Docker installed
 Docker Compose installed
-📁 Step 1: Create a Project Folder
+
+## 📁 Step 1: Create a Project Folder
 mkdir wordpress-docker
 cd wordpress-docker
-📝 Step 2: Create a docker-compose.yml File
+
+## 📝 Step 2: Create a docker-compose.yml File
 Create a file called docker-compose.yml inside your folder with the following content:
 
 version: '3.8'
@@ -48,23 +50,20 @@ In your terminal, from inside the wordpress-docker directory, run:
 docker-compose up -d
 This will download the WordPress and MySQL images, create containers, and run your WordPress site.
 
-🌐 Step 4: Access WordPress
+## 🌐 Step 4: Access WordPress
 Open your browser and go to:
 
 http://localhost:8000
 You should see the WordPress installation page. Complete the setup as you wish.
 
-📌 Useful Commands
+## 📌 Useful Commands
 Stop the containers:
-
 docker-compose down
 
 Stop and remove volumes:
-
 docker-compose down -v
 
 View logs:
-
 docker-compose logs -f
 
 
@@ -76,8 +75,10 @@ In your docker-compose.yml:
 environment:
   - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
     
-In a .env file (same folder):
+In a .env file (same folder), replace ${NGROK_AUTHTOKEN} with the actual ngrok token,here is a sample :
 
 NGROK_AUTHTOKEN=2**10Lr********ojAxiBmEq***uwcMQ***X1c*AaB*****.
 
-That way you avoid accidentally sharing it when you push to GitHub.
+(This command protects you from avoid accidentally sharing the token which is a secret when you push to GitHub).
+
+Have fun! Let me know if this process worked for you. You can also play around it further and try to host it on AWS or GCP. View my documentation on how to do just that here https://github.com/Chrimau/gcp-wordpress 
