@@ -95,6 +95,8 @@ Replace ${NGROK_AUTHTOKEN} with the actual ngrok token,here is a sample :
 
 <pre> NGROK_AUTHTOKEN=2**10Lr********ojAxiBmEq***uwcMQ***X1c*AaB**** </pre>
 
-(This command protects you from avoid accidentally sharing the token which is a secret when you push to GitHub).
+(This command protects you from accidentally sharing the token which is a secret when you push to GitHub).
+
+## WARNING: Production environments require proper secret management (e.g., Docker Secrets, HashiCorp Vault).
 
 Have fun! Let me know if this process worked for you. You can also play around it further and try to host it on AWS or GCP. View my documentation on how to do just that here https://github.com/Chrimau/gcp-wordpress 
